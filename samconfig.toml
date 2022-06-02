@@ -1,0 +1,14 @@
+version = 0.1
+[default]
+[default.deploy]
+[default.deploy.parameters]
+stack_name = "sam-app"
+s3_bucket = "aws-sam-cli-managed-default-samclisourcebucket-83id2el7hm2p"
+s3_prefix = "sam-app"
+region = "us-east-1"
+profile = "gateway-v2"
+capabilities = "CAPABILITY_IAM"
+image_repositories = []
+parameter_overrides = "YourEmail=\"davit.veranyan717@gmail.com\" Stage=\"dev\""
+disable_rollback = true
+confirm_changeset = true
