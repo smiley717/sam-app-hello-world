@@ -11,4 +11,3 @@ capabilities = "CAPABILITY_IAM"
 image_repositories = []
 parameter_overrides = "YourEmail=\"davit.veranyan717@gmail.com\" Stage=\"dev\""
 disable_rollback = true
-confirm_changeset = true

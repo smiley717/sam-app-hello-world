@@ -129,3 +129,43 @@ See the [AWS SAM developer guide](https://docs.aws.amazon.com/serverless-applica
 
 Next, you can use AWS Serverless Application Repository to deploy ready to use Apps that go beyond hello world samples and learn how authors developed their applications: [AWS Serverless Application Repository main page](https://aws.amazon.com/serverless/serverlessrepo/)
 # sam-app-hello-world
+
+## Authentication
+
+### Initial Auth
+
+```
+aws cognito-idp initiate-auth \
+--auth-flow USER_PASSWORD_AUTH \
+--auth-parameters "USERNAME={{USERNAME}},PASSWORD={{PASSWORD}}" \
+--client-id {{CLIENT_ID}} \
+--query "Session" \
+--output text`
+```
+
+### Update Password
+
+```
+aws cognito-idp admin-respond-to-auth-challenge \
+--user-pool-id {{$USERPOOLID}} \
+--client-id {{CLIENT_ID}} \
+--challenge-responses "NEW_PASSWORD=Testing123,USERNAME={{USERNAME}}" \
+--challenge-name NEW_PASSWORD_REQUIRED \
+--session $AUTH_CHALLENGE_SESSION \
+--query "AuthenticationResult.IdToken" \
+--output text
+```
+
+### Login
+```
+aws cognito-idp initiate-auth \
+--auth-flow USER_PASSWORD_AUTH \
+--auth-parameters "USERNAME={{USERNAME}},PASSWORD=Testing123" \
+--client-id {{CLIENT_ID}}
+```
+
+### Run
+
+```
+curl -H "Authorization: {{Auth Token from script above}}" {{Url to your api}}
+```
